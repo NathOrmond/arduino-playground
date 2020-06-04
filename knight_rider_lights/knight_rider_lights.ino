@@ -1,4 +1,5 @@
 int output_pins[] = {2,3,4,5,6};
+void pulse_pin(int pin);
 
 void setup() {
   // LED lights
@@ -16,17 +17,26 @@ void loop() {
   int this_pin = low_pin;
   
   do{ 
-    digitalWrite(this_pin, HIGH);
+    pulse_pin(this_pin);
     delay(delay_t);
-    digitalWrite(this_pin, LOW);
     this_pin++;
   } while(this_pin <= high_pin);
 
  do{ 
     this_pin--;
-    digitalWrite(this_pin, HIGH);
+    pulse_pin(this_pin);
     delay(delay_t);
-    digitalWrite(this_pin, LOW);
-    
   } while(this_pin >= low_pin);
+}
+
+void pulse_pin(int pin){ 
+  for(int a = 0; a < 256; a++){ 
+    analogWrite(pin, a);
+    delay(5);
+  }
+
+  for(int a = 256; a >= 0; a--){ 
+    analogWrite(pin, a);
+    delay(5);
+  }
 }
