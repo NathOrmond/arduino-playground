@@ -1,51 +1,32 @@
+int output_pins[] = {2,3,4,5,6};
+
 void setup() {
   // LED lights
-  pinMode(2,OUTPUT);
-  pinMode(3,OUTPUT);
-  pinMode(4,OUTPUT);
-  pinMode(5,OUTPUT);
-  pinMode(6,OUTPUT);
-
-  //Circuit in built LED
+  for(int pin : output_pins){ 
+    pinMode(pin, OUTPUT);
+  }
   pinMode(13,OUTPUT);
 }
 
 void loop() {
-    digitalWrite(2, HIGH);
-    delay(500);
-   
-   digitalWrite(2, LOW);
-   digitalWrite(3, HIGH);
-   delay(500);
+  int delay_t = 200;
+  int low_pin = output_pins[0];
+  int high_pin = output_pins[(sizeof(output_pins) / sizeof(output_pins[0])) - 1];
+
+  int this_pin = low_pin;
+  
+  do{ 
+    digitalWrite(this_pin, HIGH);
+    delay(delay_t);
+    digitalWrite(this_pin, LOW);
+    this_pin++;
+  } while(this_pin <= high_pin);
+
+ do{ 
+    this_pin--;
+    digitalWrite(this_pin, HIGH);
+    delay(delay_t);
+    digitalWrite(this_pin, LOW);
     
-   digitalWrite(3, LOW);
-   digitalWrite(4, HIGH);
-   delay(500);
-
-   digitalWrite(4, LOW);
-   digitalWrite(5, HIGH);
-   delay(500);
-
-   digitalWrite(5, LOW);
-   digitalWrite(6, HIGH);
-   delay(500);
-
-   digitalWrite(6, LOW);
-   digitalWrite(5, HIGH);
-   delay(500);
-    
-   digitalWrite(5, LOW);
-   digitalWrite(4, HIGH);
-   delay(500);
-
-   digitalWrite(4, LOW);
-   digitalWrite(3, HIGH);
-   delay(500);
-
-   digitalWrite(3, LOW);
-   digitalWrite(2, HIGH);
-   delay(500);
-
-    digitalWrite(2, LOW);
-    delay(500);
+  } while(this_pin >= low_pin);
 }
